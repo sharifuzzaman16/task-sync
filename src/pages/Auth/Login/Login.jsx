@@ -1,17 +1,18 @@
 import React from 'react';
-import AuthIllustration from "./assets/Authentication-rafiki.svg";
+import AuthIllustration from "../../../assets/Authentication-rafiki.svg";
+import { Link } from 'react-router-dom';
 
-const App = () => {
+const Login = () => {
   return (
     <div className='bg-[#F7F7F7] max-w-[1440px] min-h-screen flex justify-center items-center'>
       <div className="w-[80%] h-[550px] bg-white shadow-lg rounded-lg flex">
         {/* Left Side: Illustration */}
-        <div className="w-1/2 flex justify-center items-center p-8">
+        <div className="w-1/2 flex justify-center items-center">
           <img className="w-full h-full object-contain" src={AuthIllustration} alt="Authentication Illustration" />
         </div>
 
         {/* Right Side: Login Form */}
-        <div className="w-1/2 flex justify-center items-center p-8">
+        <div className="w-1/2 flex justify-center items-center">
           <div className="w-full max-w-md">
             <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center">Welcome Back</h2>
             <form>
@@ -51,9 +52,9 @@ const App = () => {
                 </button>
               </div>
               <div className="mt-6 text-center">
-                <p className='text-sm'>Don't have an account? <a href="#" className="text-[#375DFF] text-sm">
+                <p className='text-sm'>Don't have an account? <Link to={'/register'} className="text-[#375DFF] text-sm">
                   Register
-                </a></p>
+                </Link></p>
               </div>
             </form>
           </div>
@@ -63,4 +64,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Login;
