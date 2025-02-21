@@ -8,6 +8,8 @@ import './index.css'
 import Login from './pages/Auth/Login/Login.jsx';
 import Register from './pages/Auth/Register/Register.jsx';
 import Dashboard from './pages/Auth/Dashboard/Dashboard.jsx';
+import { AuthProvider } from './AuthProvider.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,12 +22,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <ProtectedRoute><Dashboard></Dashboard></ProtectedRoute>,
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthIllustration from "../../../assets/Authentication-rafiki.svg";
 import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 
 const Register = () => {
   return (
@@ -48,12 +49,19 @@ const Register = () => {
                 />
               </div>
               
-              <div className="flex items-center justify-between">
+              <div className="space-y-4">
                 <button
                   className="bg-blue-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                   type="button"
                 >
                   Register
+                </button>
+                <button
+                  className="bg-red-500 flex items-center justify-center gap-2 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                  type="button"
+                >
+                  <FcGoogle className='text-2xl'></FcGoogle>
+                  Register with Google
                 </button>
               </div>
               <div className="mt-6 text-center">

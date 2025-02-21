@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRegEdit } from 'react-icons/fa';
 import { FaPlus, FaRegBell, FaRegStar, FaRegTrashCan, FaRegUser } from 'react-icons/fa6';
@@ -9,8 +9,16 @@ import { TfiDashboard } from 'react-icons/tfi';
 import ThemeToggle from '../../../utils/ThemeToggle.jsx';
 import Logo from '/scheduler-svgrepo-com.svg'
 import { useState } from "react";
+import { AuthContext } from '../../../AuthProvider.jsx';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    console.log(user)
 
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
@@ -49,6 +57,27 @@ const Dashboard = () => {
         setPriority("Medium");
     };
 
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'User Logged Out',
+                    text: 'See you soon!',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                navigate('/');
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Logout Failed',
+                    text: error.message,
+                });
+            });
+    }
+
     return (
         <div className='bg-[#F7F7F7] dark:bg-[#2A2A2A] max-w-[1440px] min-h-screen flex'>
             <div className='w-[20%] min-h-screen bg-white dark:bg-[#1E1E1E] border-r-2 border-[#F7F7F7] dark:border-[#2A2A2A] flex flex-col justify-between'>
@@ -66,7 +95,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
                 <div className='w-full p-8'>
-                    <button className='bg-red-500 flex items-center justify-center text-lg gap-2 px-4 w-full py-2 rounded-lg text-white'>Logout <MdLogout></MdLogout></button>
+                    <button onClick={handleLogout} className='bg-red-500 flex items-center justify-center text-lg gap-2 px-4 w-full py-2 rounded-lg text-white'>Logout <MdLogout></MdLogout></button>
                 </div>
             </div>
             <div className='w-[80%] h-screen overflow-y-scroll bg-[#F7F7F7] dark:bg-[#2A2A2A]'>
@@ -92,7 +121,7 @@ const Dashboard = () => {
                         <FaRegBell className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></FaRegBell>
                         <div className="avatar">
                             <div className="ring-[#F7F7F7] dark:ring-[#2A2A2A] ring-offset-base-100 w-[46px] rounded-full ring ring-offset">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                <img src={user?.photoURL} />
                             </div>
                         </div>
                     </div>
@@ -174,7 +203,7 @@ const Dashboard = () => {
 
                                             {/* Buttons */}
                                             <div className="space-y-4">
-                                                
+
                                                 <button type="submit" className="bg-blue-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full">
                                                     Save
                                                 </button>
