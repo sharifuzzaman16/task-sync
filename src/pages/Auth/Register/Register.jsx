@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import AuthIllustration from "../../../assets/Authentication-rafiki.svg";
 import { useAuth } from '../../../AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const { register } = useAuth();
@@ -14,8 +14,6 @@ const Register = () => {
     photoURL: ''
   });
 
-  const [error, setError] = useState('');
-  
   // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -24,12 +22,15 @@ const Register = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
 
     const { name, email, password, photoURL } = formData;
     
     if (!name || !email || !password || !photoURL) {
-      setError("All fields are required!");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'All fields are required!',
+      });
       return;
     }
 
@@ -38,14 +39,22 @@ const Register = () => {
         Swal.fire({
           icon: 'success',
           title: 'Registration Successful!',
-          text: 'You have successfully registered.',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Go to Dashboard'
-        }).then(() => {
-          navigate('/dashboard');
+          text: 'You will be redirected to the dashboard.',
+          timer: 2000,
+          showConfirmButton: false
         });
+
+        setTimeout(() => {
+          navigate('/dashboard'); // Redirect to dashboard
+        }, 2000);
       })
-      .catch(err => setError(err.message));
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Failed!',
+          text: err.message,
+        });
+      });
   };
 
   return (
@@ -60,8 +69,6 @@ const Register = () => {
         <div className="w-1/2 flex justify-center items-center">
           <div className="w-full max-w-md">
             <h2 className="text-3xl font-bold mb-6 dark:text-[#E0E0E0] text-[#1E2022] text-center">Create an Account</h2>
-            
-            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-2">
