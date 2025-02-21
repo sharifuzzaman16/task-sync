@@ -39,20 +39,20 @@ const Login = () => {
               </div>
               <div className="mb-6">
                 <label className="flex items-center text-gray-700 text-sm">
-                  <input type="checkbox" className="form-checkbox h-4 w-4 text-[#375DFF] transition duration-150 ease-in-out" />
+                  <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500 transition duration-150 ease-in-out" />
                   <span className="ml-2">Remember Me</span>
                 </label>
               </div>
               <div className="flex items-center justify-between">
                 <button
-                  className="bg-[#375DFF] text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                  className="bg-blue-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                   type="button"
                 >
                   Sign In
                 </button>
               </div>
               <div className="mt-6 text-center">
-                <p className='text-sm'>Don't have an account? <Link to={'/register'} className="text-[#375DFF] text-sm">
+                <p className='text-sm'>Don't have an account? <Link to={'/register'} className="text-blue-500 text-sm">
                   Register
                 </Link></p>
               </div>

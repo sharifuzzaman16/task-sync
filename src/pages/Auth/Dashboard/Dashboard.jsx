@@ -1,33 +1,36 @@
 import React from 'react';
-import { FaPlus, FaRegBell, FaRegStar, FaRegUser } from 'react-icons/fa6';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { FaRegEdit } from 'react-icons/fa';
+import { FaPlus, FaRegBell, FaRegStar, FaRegTrashCan, FaRegUser } from 'react-icons/fa6';
 import { GrCompliance } from 'react-icons/gr';
 import { IoCheckmarkDone } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
 import { TfiDashboard } from 'react-icons/tfi';
+import ThemeToggle from '../../../utils/ThemeToggle.jsx';
 
 const Dashboard = () => {
     return (
-        <div className='bg-[#F7F7F7] max-w-[1440px] min-h-screen flex'>
-            <div className='w-[20%] min-h-screen bg-white border-r-2 border-[#F7F7F7] flex flex-col justify-between'>
+        <div className='bg-[#F7F7F7] dark:bg-[#2A2A2A] max-w-[1440px] min-h-screen flex'>
+            <div className='w-[20%] min-h-screen bg-white dark:bg-[#1E1E1E] border-r-2 border-[#F7F7F7] dark:border-[#2A2A2A] flex flex-col justify-between'>
 
                 <div>
                     <div className="w-full h-[70px] flex items-center justify-center">
-                        <h3 className='text-2xl font-bold'>TaskSync</h3>
+                        <h3 className='text-2xl font-bold text-blue-500'>TaskSync</h3>
                     </div>
                     <ul className='flex flex-col w-full gap-3 p-8'>
-                        <li className=' py-2 w-full border border-[#F7F7F7] rounded-lg px-4'><a className='text-lg font-semibold flex items-center gap-2' href=""><TfiDashboard className='text-2xl text-orange-500'></TfiDashboard> Overview</a></li>
-                        <li className=' py-2 w-full border border-[#F7F7F7] rounded-lg px-4'><a className='text-lg font-semibold flex items-center gap-2' href=""><GrCompliance className='text-2xl text-blue-500'></GrCompliance> Tasks</a></li>
-                        <li className=' py-2 w-full border border-[#F7F7F7] rounded-lg px-4'><a className='text-lg font-semibold flex items-center gap-2' href=""><FaRegStar className='text-2xl text-yellow-500'></FaRegStar> Important Tasks</a></li>
-                        <li className=' py-2 w-full border border-[#F7F7F7] rounded-lg px-4'><a className='text-lg font-semibold flex items-center gap-2' href=""><IoCheckmarkDone className='text-green-500 text-2xl'></IoCheckmarkDone> Completed Tasks</a></li>
-                        <li className=' py-2 w-full border border-[#F7F7F7] rounded-lg px-4'><a className='text-lg font-semibold flex items-center gap-2' href=""><FaRegUser className='text-2xl text-violet-500'></FaRegUser> Profile</a></li>
+                        <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><TfiDashboard className='text-2xl text-orange-500'></TfiDashboard> Overview</a></li>
+                        <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><GrCompliance className='text-2xl text-blue-500'></GrCompliance> Tasks</a></li>
+                        <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><FaRegStar className='text-2xl text-yellow-500'></FaRegStar> Important Tasks</a></li>
+                        <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><IoCheckmarkDone className='text-green-500 text-2xl'></IoCheckmarkDone> Completed Tasks</a></li>
+                        <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><FaRegUser className='text-2xl text-violet-500'></FaRegUser> Profile</a></li>
                     </ul>
                 </div>
                 <div className='w-full p-8'>
                     <button className='bg-red-500 flex items-center justify-center text-lg gap-2 px-4 w-full py-2 rounded-lg text-white'>Logout <MdLogout></MdLogout></button>
                 </div>
             </div>
-            <div className='w-[80%] min-h-screen bg-[#F7F7F7]'>
-                <div className='w-full h-[70px] bg-white px-8 flex items-center justify-between'>
+            <div className='w-[80%] h-screen overflow-scroll bg-[#F7F7F7] dark:bg-[#2A2A2A]'>
+                <div className='w-[80%] h-[70px] fixed top-0 right-0 bg-white dark:bg-[#1E1E1E] px-8 flex items-center justify-between'>
                     <div className='max-w-xs'>
                         <label className="input input-bordered py-0 flex items-center gap-2">
                             <input type="text" className="grow" placeholder="Search" />
@@ -44,7 +47,7 @@ const Dashboard = () => {
                         </label>
                     </div>
                     <div className='flex items-center gap-4'>
-                        <div>
+                        {/* <div>
                             <label className="flex cursor-pointer gap-2">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +63,7 @@ const Dashboard = () => {
                                     <path
                                         d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
                                 </svg>
-                                <input type="checkbox" value="synthwave" className="toggle theme-controller" />
+                                <input type="checkbox" value="dark" className="toggle theme-controller" />
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="20"
@@ -74,17 +77,343 @@ const Dashboard = () => {
                                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                                 </svg>
                             </label>
-                        </div>
+                        </div> */}
+                        <ThemeToggle></ThemeToggle>
                         <FaRegBell className='text-xl'></FaRegBell>
                         <div className="avatar">
-                            <div className="ring-[#F7F7F7] ring-offset-base-100 w-[46px] rounded-full ring ring-offset">
+                            <div className="ring-[#F7F7F7] dark:ring-[#2A2A2A] ring-offset-base-100 w-[46px] rounded-full ring ring-offset">
                                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div className='w-full grid pt-[70px] gap-6 my-6 px-6 grid-cols-3'>
+                    <div className='w-full'>
+                        <div className='flex items-center justify-between'>
+                            <div className='flex items-center gap-2'>
+                                <div className='bg-red-500 w-2 h-2 rounded-full'></div>
+                                <div className='flex items-center gap-3'>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>TO DO</h4>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>7</h4>
+                                </div>
+                            </div>
+                            <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
+                        </div>
+                        <div>
+                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                        </div>
+                        <div className='mt-4 space-y-4'>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
 
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero, otherwise I will
+                                    be kicked out of SCIC.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero, otherwise I will
+                                    be kicked out of SCIC.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-full'>
+                        <div className='flex items-center justify-between'>
+                            <div className='flex items-center gap-2'>
+                                <div className='bg-blue-500 w-2 h-2 rounded-full'></div>
+                                <div className='flex items-center gap-3'>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>In Progress</h4>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>3</h4>
+                                </div>
+                            </div>
+                            <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
+                        </div>
+                        <div>
+                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                        </div>
+                        <div className='mt-4 space-y-4'>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    Lorem ipsum dolor sit amet.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-yellow-100 text-yellow-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        Medium
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit dolorum vel sit illo, aperiam ipsum! Alias itaque voluptate dolores quam.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-full'>
+                        <div className='flex items-center justify-between'>
+                            <div className='flex items-center gap-2'>
+                                <div className='bg-green-500 w-2 h-2 rounded-full'></div>
+                                <div className='flex items-center gap-3'>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>Done</h4>
+                                    <h4 className='font-semibold dark:text-[#E0E0E0] text-[#1E2022]'>5</h4>
+                                </div>
+                            </div>
+                            <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
+                        </div>
+                        <div>
+                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                        </div>
+                        <div className='mt-4 space-y-4'>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero, otherwise I will
+                                    be kicked out of SCIC.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-green-100 text-green-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        Low
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    I have to complete the task given by Programming Hero
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+                                {/* Top Section */}
+                                <div className="flex items-start justify-between">
+                                    <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
+                                        High
+                                    </span>
+                                    <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
+                                </div>
+
+                                {/* Task Content */}
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                    Complete the Job Task
+                                </h3>
+                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit at facere illo optio in molestiae asperiores magni cum tempore corrupti.
+                                </p>
+
+                                {/* Divider */}
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+                                {/* Bottom Section */}
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">2-Jan-2025</p>
+                                    <div className="flex gap-3">
+                                        <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
+                                        <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
+                                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

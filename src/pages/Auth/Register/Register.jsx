@@ -50,14 +50,14 @@ const Register = () => {
               
               <div className="flex items-center justify-between">
                 <button
-                  className="bg-[#375DFF] text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                  className="bg-blue-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                   type="button"
                 >
                   Register
                 </button>
               </div>
               <div className="mt-6 text-center">
-                <p className='text-sm'>Already have an account? <Link to={'/'} className="text-[#375DFF] text-sm">
+                <p className='text-sm'>Already have an account? <Link to={'/'} className="text-blue-500 text-sm">
                   Login
                 </Link></p>
               </div>
