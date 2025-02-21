@@ -8,8 +8,47 @@ import { MdLogout } from 'react-icons/md';
 import { TfiDashboard } from 'react-icons/tfi';
 import ThemeToggle from '../../../utils/ThemeToggle.jsx';
 import Logo from '/scheduler-svgrepo-com.svg'
+import { useState } from "react";
 
 const Dashboard = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("To-Do");
+    const [priority, setPriority] = useState("Medium");
+
+    // Open modal with the selected category
+    const openModal = (selectedCategory) => {
+        setCategory(selectedCategory);
+        setIsOpen(true);
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!title.trim()) {
+            alert("Title is required!");
+            return;
+        }
+        if (title.length > 50) {
+            alert("Title must be under 50 characters!");
+            return;
+        }
+        if (description.length > 200) {
+            alert("Description must be under 200 characters!");
+            return;
+        }
+
+        console.log({ title, description, category, priority });
+
+        // Close modal & reset fields
+        setIsOpen(false);
+        setTitle("");
+        setDescription("");
+        setPriority("Medium");
+    };
+
     return (
         <div className='bg-[#F7F7F7] dark:bg-[#2A2A2A] max-w-[1440px] min-h-screen flex'>
             <div className='w-[20%] min-h-screen bg-white dark:bg-[#1E1E1E] border-r-2 border-[#F7F7F7] dark:border-[#2A2A2A] flex flex-col justify-between'>
@@ -48,7 +87,7 @@ const Dashboard = () => {
                         </label>
                     </div>
                     <div className='flex items-center gap-4'>
-                        
+
                         <ThemeToggle></ThemeToggle>
                         <FaRegBell className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></FaRegBell>
                         <div className="avatar">
@@ -72,7 +111,85 @@ const Dashboard = () => {
                             <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
                         </div>
                         <div>
-                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                            <button onClick={() => openModal("To-Do")} className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                            {/* Modal */}
+                            {isOpen && (
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div className="bg-white dark:bg-[#1E1E1E] p-6 rounded-lg w-[500px] overflow-y-auto max-h-[90vh] scrollbar-hide shadow-lg">
+                                        <h2 className="text-2xl dark:text-[#E0E0E0] text-[#1E2022] text-center font-semibold mb-4">Add Task</h2>
+                                        <form onSubmit={handleSubmit}>
+                                            {/* Title Input */}
+                                            <label className="block mb-2 text-[#52616B] dark:text-[#A0A0A0]">
+                                                Title <span className="text-red-500">*</span>
+                                                <input
+                                                    type="text"
+                                                    value={title}
+                                                    onChange={(e) => setTitle(e.target.value)}
+                                                    maxLength={50}
+                                                    required
+                                                    className="input mt-2 input-bordered w-full border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] text-[#52616B] dark:text-[#A0A0A0]"
+                                                />
+                                            </label>
+
+                                            {/* Description Input */}
+                                            <label className="block mb-2 text-[#52616B] dark:text-[#A0A0A0]">
+                                                Description
+                                                <textarea
+                                                    value={description}
+                                                    onChange={(e) => setDescription(e.target.value)}
+                                                    maxLength={200}
+                                                    className="textarea mt-2 textarea-bordered w-full border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] text-[#52616B] dark:text-[#A0A0A0]"
+                                                />
+                                            </label>
+
+                                            {/* Category Dropdown (pre-selected) */}
+                                            <label className="block mb-2 text-[#52616B] dark:text-[#A0A0A0]">
+                                                Category <span className="text-red-500">*</span>
+                                                <select
+                                                    required
+                                                    value={category}
+                                                    onChange={(e) => setCategory(e.target.value)}
+                                                    className="select mt-2 select-bordered w-full border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] text-[#52616B] dark:text-[#A0A0A0]"
+                                                >
+                                                    <option>To-Do</option>
+                                                    <option>In Progress</option>
+                                                    <option>Done</option>
+                                                </select>
+                                            </label>
+
+                                            {/* Priority Dropdown */}
+                                            <label className="block mb-4 text-[#52616B] dark:text-[#A0A0A0]">
+                                                Priority <span className="text-red-500">*</span>
+                                                <select
+                                                    required
+                                                    value={priority}
+                                                    onChange={(e) => setPriority(e.target.value)}
+                                                    className="select select-bordered mt-2 w-full border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] text-[#52616B] dark:text-[#A0A0A0]"
+                                                >
+                                                    <option>Low</option>
+                                                    <option>Medium</option>
+                                                    <option>High</option>
+                                                </select>
+                                            </label>
+
+                                            {/* Buttons */}
+                                            <div className="space-y-4">
+                                                
+                                                <button type="submit" className="bg-blue-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                                                    Save
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setIsOpen(false)}
+                                                    className="bg-gray-500 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className='mt-4 space-y-4'>
                             <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
@@ -85,7 +202,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -116,7 +233,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -146,7 +263,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -181,7 +298,7 @@ const Dashboard = () => {
                             <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
                         </div>
                         <div>
-                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                            <button onClick={() => openModal("In Progress")} className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
                         </div>
                         <div className='mt-4 space-y-4'>
                             <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
@@ -194,7 +311,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -224,7 +341,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -254,7 +371,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -288,7 +405,7 @@ const Dashboard = () => {
                             <BsThreeDotsVertical className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></BsThreeDotsVertical>
                         </div>
                         <div>
-                            <button className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
+                            <button onClick={() => openModal("Done")} className='flex items-center justify-center gap-2 shadow-sm bg-white dark:bg-[#1E1E1E] py-2 font-semibold w-full rounded-lg border border-gray-200 dark:border-gray-700 text-blue-500 mt-4'><FaPlus></FaPlus> Add New Task</button>
                         </div>
                         <div className='mt-4 space-y-4'>
                             <div className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
@@ -301,7 +418,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -332,7 +449,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
@@ -362,7 +479,7 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Task Content */}
-                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold text-gray-800 mt-3">
+                                <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
                                     Complete the Job Task
                                 </h3>
                                 <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
