@@ -1,15 +1,14 @@
 import React, { useContext, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaRegEdit} from "react-icons/fa";
-import { FaPlus, FaRegStar, FaRegTrashCan } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../AuthProvider";
+import TaskCard from "../../../components/TaskCard";
 
 const Tasks = () => {
-
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
@@ -21,7 +20,7 @@ const Tasks = () => {
 
     // Fetch tasks from the backend
     const fetchTasks = async () => {
-        const response = await axios.get("api/tasks");
+        const response = await axios.get(`http://localhost:5000/tasks?userEmail=${user.email}`);
         return response.data;
     };
 
@@ -108,19 +107,8 @@ const Tasks = () => {
             userEmail: user.email,
         };
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You are about to add a new task!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, add it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                mutation.mutate(taskData);
-            }
-        });
+        // Directly mutate the task data without confirmation
+        mutation.mutate(taskData);
     };
 
     // Filter tasks by category
@@ -158,34 +146,7 @@ const Tasks = () => {
                 </div>
                 <div className="mt-4 space-y-4">
                     {filterTasksByCategory("To-Do").map((task) => (
-                        <div
-                            key={task._id}
-                            className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
-                        >
-                            <div className="flex items-start justify-between">
-                                <span className="bg-red-100 text-red-500 text-xs font-medium px-3 py-1 rounded-full">
-                                    {task.priority}
-                                </span>
-                                <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
-                            </div>
-                            <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
-                                {task.title}
-                            </h3>
-                            <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
-                                {task.description}
-                            </p>
-                            <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
-                            <div className="flex items-center justify-between">
-                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">
-                                    {new Date(task.timestamp).toLocaleDateString()}
-                                </p>
-                                <div className="flex gap-3">
-                                    <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
-                                    <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
-                                    <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
-                                </div>
-                            </div>
-                        </div>
+                        <TaskCard key={task._id} task={task} />
                     ))}
                 </div>
             </div>
@@ -214,34 +175,7 @@ const Tasks = () => {
                 </div>
                 <div className="mt-4 space-y-4">
                     {filterTasksByCategory("In Progress").map((task) => (
-                        <div
-                            key={task._id}
-                            className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
-                        >
-                            <div className="flex items-start justify-between">
-                                <span className="bg-blue-100 text-blue-500 text-xs font-medium px-3 py-1 rounded-full">
-                                    {task.priority}
-                                </span>
-                                <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
-                            </div>
-                            <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
-                                {task.title}
-                            </h3>
-                            <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
-                                {task.description}
-                            </p>
-                            <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
-                            <div className="flex items-center justify-between">
-                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">
-                                    {new Date(task.timestamp).toLocaleDateString()}
-                                </p>
-                                <div className="flex gap-3">
-                                    <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
-                                    <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
-                                    <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
-                                </div>
-                            </div>
-                        </div>
+                        <TaskCard key={task._id} task={task} />
                     ))}
                 </div>
             </div>
@@ -270,34 +204,7 @@ const Tasks = () => {
                 </div>
                 <div className="mt-4 space-y-4">
                     {filterTasksByCategory("Done").map((task) => (
-                        <div
-                            key={task._id}
-                            className="w-full bg-white dark:bg-[#1E1E1E] rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
-                        >
-                            <div className="flex items-start justify-between">
-                                <span className="bg-green-100 text-green-500 text-xs font-medium px-3 py-1 rounded-full">
-                                    {task.priority}
-                                </span>
-                                <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
-                            </div>
-                            <h3 className="text-lg dark:text-[#E0E0E0] text-[#1E2022] font-semibold mt-3">
-                                {task.title}
-                            </h3>
-                            <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm mt-1 leading-relaxed">
-                                {task.description}
-                            </p>
-                            <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
-                            <div className="flex items-center justify-between">
-                                <p className="text-[#52616B] dark:text-[#A0A0A0] text-sm">
-                                    {new Date(task.timestamp).toLocaleDateString()}
-                                </p>
-                                <div className="flex gap-3">
-                                    <FaRegStar className="text-lg text-yellow-400 cursor-pointer hover:text-yellow-500 transition" />
-                                    <FaRegEdit className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition" />
-                                    <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
-                                </div>
-                            </div>
-                        </div>
+                        <TaskCard key={task._id} task={task} />
                     ))}
                 </div>
             </div>
