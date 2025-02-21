@@ -16,7 +16,7 @@ function ThemeToggle() {
 
   return (
     <button
-      className="p-2 rounded bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+      className="p-2 rounded bg-[#F7F7F7] dark:bg-[#2A2A2A] dark:text-[#E0E0E0] text-[#1E2022]"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
       {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}

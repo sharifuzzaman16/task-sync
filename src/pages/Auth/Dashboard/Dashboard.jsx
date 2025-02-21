@@ -7,6 +7,7 @@ import { IoCheckmarkDone } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
 import { TfiDashboard } from 'react-icons/tfi';
 import ThemeToggle from '../../../utils/ThemeToggle.jsx';
+import Logo from '/scheduler-svgrepo-com.svg'
 
 const Dashboard = () => {
     return (
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
                 <div>
                     <div className="w-full h-[70px] flex items-center justify-center">
-                        <h3 className='text-2xl font-bold text-blue-500'>TaskSync</h3>
+                        <h3 className='text-2xl font-bold text-blue-500 flex items-center'><img className='w-8' src={Logo} alt="" /> TaskSync</h3>
                     </div>
                     <ul className='flex flex-col w-full gap-3 p-8'>
                         <li className=' py-2 w-full border border-[#F7F7F7] dark:border-[#2A2A2A] rounded-lg px-4'><a className='text-lg font-semibold flex items-center dark:text-[#E0E0E0] text-[#1E2022] gap-2' href=""><TfiDashboard className='text-2xl text-orange-500'></TfiDashboard> Overview</a></li>
@@ -29,11 +30,11 @@ const Dashboard = () => {
                     <button className='bg-red-500 flex items-center justify-center text-lg gap-2 px-4 w-full py-2 rounded-lg text-white'>Logout <MdLogout></MdLogout></button>
                 </div>
             </div>
-            <div className='w-[80%] h-screen overflow-scroll bg-[#F7F7F7] dark:bg-[#2A2A2A]'>
+            <div className='w-[80%] h-screen overflow-y-scroll bg-[#F7F7F7] dark:bg-[#2A2A2A]'>
                 <div className='w-[80%] h-[70px] fixed top-0 right-0 bg-white dark:bg-[#1E1E1E] px-8 flex items-center justify-between'>
                     <div className='max-w-xs'>
-                        <label className="input input-bordered py-0 flex items-center gap-2">
-                            <input type="text" className="grow" placeholder="Search" />
+                        <label className="input input-bordered border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] py-0 dark:text-[#E0E0E0] text-[#1E2022] flex items-center gap-2">
+                            <input type="text" className="grow dark:text-[#E0E0E0] text-[#1E2022]" placeholder="Search" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"
@@ -47,39 +48,9 @@ const Dashboard = () => {
                         </label>
                     </div>
                     <div className='flex items-center gap-4'>
-                        {/* <div>
-                            <label className="flex cursor-pointer gap-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="5" />
-                                    <path
-                                        d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-                                </svg>
-                                <input type="checkbox" value="dark" className="toggle theme-controller" />
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                                </svg>
-                            </label>
-                        </div> */}
+                        
                         <ThemeToggle></ThemeToggle>
-                        <FaRegBell className='text-xl'></FaRegBell>
+                        <FaRegBell className='text-xl dark:text-[#E0E0E0] text-[#1E2022]'></FaRegBell>
                         <div className="avatar">
                             <div className="ring-[#F7F7F7] dark:ring-[#2A2A2A] ring-offset-base-100 w-[46px] rounded-full ring ring-offset">
                                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
