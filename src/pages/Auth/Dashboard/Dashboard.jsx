@@ -64,7 +64,7 @@ const Dashboard = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'User Logged Out',
-                    text: 'See you soon!',
+                    text: 'Be back soon!',
                     timer: 2000,
                     showConfirmButton: false
                 });

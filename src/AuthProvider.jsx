@@ -5,7 +5,8 @@ import {
   signOut, 
   onAuthStateChanged, 
   GoogleAuthProvider, 
-  signInWithPopup 
+  signInWithPopup, 
+  updateProfile
 } from "firebase/auth";
 import { auth } from "./firebase.config";
 
@@ -23,8 +24,19 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // Register user
-  const register = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+  // Register user and update profile
+  const register = (email, password, name, photoURL) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        return updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL
+        }).then(() => {
+          // Update state after profile update
+          setUser({ ...user, displayName: name, photoURL: photoURL });
+        });
+      });
+  };
 
   // Login user
   const login = (email, password) => signInWithEmailAndPassword(auth, email, password);

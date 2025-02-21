@@ -40,7 +40,7 @@ const Login = () => {
       .then((result) => {
         Swal.fire({
           icon: 'success',
-          title: 'Google Login Successful',
+          title: 'Login Successful',
           text: 'Welcome back!',
           timer: 2000,
           showConfirmButton: false
@@ -49,7 +49,7 @@ const Login = () => {
       }).catch((error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Google Login Failed',
+          title: 'Login Failed',
           text: error.message,
         });
       });
@@ -65,8 +65,8 @@ const Login = () => {
           <div className="w-full max-w-md">
             <h2 className="text-3xl font-bold mb-6 dark:text-[#E0E0E0] text-[#1E2022] text-center">Welcome Back</h2>
             <form onSubmit={handleLogin}>
-              <div className="mb-4">
-                <label className="block text-[#52616B] dark:text-[#A0A0A0] font-bold mb-2">Email</label>
+              <div className="mb-1">
+                <label className="block text-[#52616B] dark:text-[#A0A0A0] font-bold mb-1">Email</label>
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -76,8 +76,8 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="mb-6">
-                <label className="block text-[#52616B] dark:text-[#A0A0A0] font-bold mb-2">Password</label>
+              <div className="mb-4">
+                <label className="block text-[#52616B] dark:text-[#A0A0A0] font-bold mb-1">Password</label>
                 <input
                   type="password"
                   placeholder="Enter your password"
@@ -95,7 +95,7 @@ const Login = () => {
                   <FcGoogle className='text-2xl' /> Login with Google
                 </button>
               </div>
-              <div className="mt-6 text-center">
+              <div className="mt-4 text-center">
                 <p className='text-sm text-[#52616B] dark:text-[#A0A0A0]'>Don't have an account? <Link to={'/register'} className="text-blue-500 text-sm">Register</Link></p>
               </div>
             </form>
