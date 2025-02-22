@@ -50,6 +50,14 @@ const Tasks = () => {
                         task._id === updatedTask._id ? updatedTask : task
                     )
                 ); // Update the task list
+            } else if (message.type === "TASK_ADDED") {
+                const newTask = message.data;
+                setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the list
+            } else if (message.type === "TASK_DELETED") {
+                const deletedTaskId = message.data._id;
+                setTasks((prevTasks) =>
+                    prevTasks.filter((task) => task._id !== deletedTaskId)
+                ); // Remove deleted task from the list
             }
         };
 
@@ -89,7 +97,7 @@ const Tasks = () => {
 
     const mutation = useMutation({
         mutationFn: addTask,
-        onSuccess: () => {
+        onSuccess: (data) => {
             Swal.fire({
                 title: "Success!",
                 text: "Task added successfully!",
@@ -106,6 +114,48 @@ const Tasks = () => {
             Swal.fire({
                 title: "Error!",
                 text: "Failed to add task.",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        },
+    });
+
+    // Update task mutation
+    const updateTask = async ({ taskId, category }) => {
+        const response = await axios.put(`http://localhost:5000/tasks/${taskId}`, { category });
+        return response.data;
+    };
+
+    const updateMutation = useMutation({
+        mutationFn: updateTask,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Refresh tasks
+        },
+        onError: () => {
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to update task category.",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        },
+    });
+
+    // Delete task mutation
+    const deleteTask = async (taskId) => {
+        const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+        return response.data;
+    };
+
+    const deleteMutation = useMutation({
+        mutationFn: deleteTask,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Refresh tasks
+        },
+        onError: () => {
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to delete task.",
                 icon: "error",
                 confirmButtonText: "OK",
             });
@@ -130,7 +180,8 @@ const Tasks = () => {
         if (source.droppableId !== destination.droppableId) {
             try {
                 // Update the task category in the backend
-                await axios.put(`http://localhost:5000/tasks/${task._id}`, {
+                await updateMutation.mutateAsync({
+                    taskId: task._id,
                     category: destination.droppableId,
                 });
 
@@ -139,17 +190,8 @@ const Tasks = () => {
                     t._id === task._id ? { ...t, category: destination.droppableId } : t
                 );
                 setTasks(updatedTasks);
-
-                // Update the React Query cache
-                queryClient.setQueryData(["tasks"], updatedTasks);
             } catch (error) {
                 console.error("Failed to update task category:", error);
-                Swal.fire({
-                    title: "Error!",
-                    text: "Failed to update task category.",
-                    icon: "error",
-                    confirmButtonText: "OK",
-                });
             }
         }
     };
@@ -253,7 +295,7 @@ const Tasks = () => {
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
                                                 >
-                                                    <TaskCard task={task} />
+                                                    <TaskCard task={task} onDelete={() => deleteMutation.mutate(task._id)} />
                                                 </div>
                                             )}
                                         </Draggable>

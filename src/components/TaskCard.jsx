@@ -35,7 +35,13 @@ const TaskCard = ({ task }) => {
     // Edit task mutation
     const editTaskMutation = useMutation({
         mutationFn: async (updatedTask) => {
-            const response = await axios.put(`http://localhost:5000/tasks/${task._id}`, updatedTask);
+            const response = await axios.put(
+                `http://localhost:5000/tasks/${task._id}`,
+                {
+                    ...updatedTask,
+                    userEmail: task.userEmail, // Include userEmail in the update request
+                }
+            );
             return response.data;
         },
         onSuccess: (data) => {
@@ -255,6 +261,7 @@ TaskCard.defaultProps = {
         category: "To-Do",
         priority: "Medium", // Default priority
         timestamp: new Date().toISOString(),
+        userEmail: "", // Ensure userEmail is included
     },
 };
 
