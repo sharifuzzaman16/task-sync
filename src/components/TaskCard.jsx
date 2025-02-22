@@ -59,6 +59,35 @@ const TaskCard = ({ task }) => {
         },
     });
 
+    // Delete task mutation
+    const deleteTaskMutation = useMutation({
+        mutationFn: async (taskId) => {
+            const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            // Update the cached data for the task list
+            queryClient.setQueryData(["tasks"], (oldTasks) => {
+                return oldTasks.filter((t) => t._id !== task._id);
+            });
+
+            Swal.fire({
+                title: "Success!",
+                text: "Task deleted successfully!",
+                icon: "success",
+                confirmButtonText: "OK",
+            });
+        },
+        onError: () => {
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to delete task.",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        },
+    });
+
     // Handle edit task
     const handleEditTask = async (e) => {
         e.preventDefault();
@@ -71,6 +100,23 @@ const TaskCard = ({ task }) => {
         };
 
         editTaskMutation.mutate(updatedTask);
+    };
+
+    // Handle delete task
+    const handleDeleteTask = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteTaskMutation.mutate(task._id);
+            }
+        });
     };
 
     return (
@@ -106,7 +152,10 @@ const TaskCard = ({ task }) => {
                             className="text-lg text-blue-500 cursor-pointer hover:text-blue-600 transition"
                             onClick={() => setIsEditModalOpen(true)}
                         />
-                        <FaRegTrashCan className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition" />
+                        <FaRegTrashCan
+                            className="text-lg text-red-500 cursor-pointer hover:text-red-600 transition"
+                            onClick={handleDeleteTask}
+                        />
                     </div>
                 </div>
             </div>
