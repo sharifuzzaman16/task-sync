@@ -35,7 +35,7 @@ const TaskCard = ({ task }) => {
     // Edit task mutation
     const editTaskMutation = useMutation({
         mutationFn: async (updatedTask) => {
-            const response = await axios.put(
+            const response = await axios.patch(
                 `http://localhost:5000/tasks/${task._id}`,
                 {
                     ...updatedTask,
