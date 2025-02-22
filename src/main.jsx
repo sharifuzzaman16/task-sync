@@ -10,6 +10,7 @@ import Register from './pages/Auth/Register/Register.jsx';
 import Dashboard from './pages/Auth/Dashboard/Dashboard.jsx';
 import { AuthProvider } from './AuthProvider.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
+import HomeRedirect from './HomeRedirect.jsx';
 import Tasks from './pages/Auth/Dashboard/Tasks.jsx';
 import CompletedTask from './pages/Auth/Dashboard/CompletedTask.jsx';
 import ImportantTask from './pages/Auth/Dashboard/ImportantTask.jsx';
@@ -23,6 +24,10 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <HomeRedirect />,
+  },
+  {
+    path: "/login",
     element: <Login />,
   },
   {
