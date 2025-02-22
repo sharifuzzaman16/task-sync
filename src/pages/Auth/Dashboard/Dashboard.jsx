@@ -18,7 +18,7 @@ const Dashboard = () => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    console.log(user)
+    // console.log(user)
 
     
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 <div className='w-[80%] h-[70px] fixed top-0 right-0 bg-white dark:bg-[#1E1E1E] px-8 flex items-center justify-between'>
                     <div className='max-w-xs'>
                         <label className="input input-bordered border-[#F7F7F7] dark:border-[#2A2A2A] bg-[#F7F7F7] dark:bg-[#2A2A2A] py-0 dark:text-[#E0E0E0] text-[#1E2022] flex items-center gap-2">
-                            <input disabled type="text" className="grow dark:text-[#E0E0E0] text-[#1E2022]" placeholder="Search" />
+                            <input type="text" className="grow dark:text-[#E0E0E0] text-[#1E2022]" placeholder="Search" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"

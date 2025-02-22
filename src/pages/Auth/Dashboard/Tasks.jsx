@@ -22,10 +22,10 @@ const Tasks = () => {
 
     // WebSocket connection for real-time updates
     useEffect(() => {
-        const ws = new WebSocket("ws://localhost:5000");
+        const ws = new WebSocket("wss://task-sync-sever.onrender.com");
 
         ws.onopen = () => {
-            console.log("Connected to WebSocket");
+            // console.log("Connected to WebSocket");
             // Send the user's email to the WebSocket server
             ws.send(JSON.stringify({ type: "INITIAL_TASKS", userEmail: user.email }));
         };
@@ -62,7 +62,7 @@ const Tasks = () => {
         };
 
         ws.onclose = () => {
-            console.log("Disconnected from WebSocket");
+            // console.log("Disconnected from WebSocket");
         };
 
         return () => {
@@ -72,7 +72,7 @@ const Tasks = () => {
 
     // Fetch tasks from the backend
     const fetchTasks = async () => {
-        const response = await axios.get(`http://localhost:5000/tasks?userEmail=${user.email}`);
+        const response = await axios.get(`https://task-sync-sever.onrender.com/tasks?userEmail=${user.email}`);
         if (!Array.isArray(response.data)) {
             console.error("Invalid data format: Expected an array");
             return [];
@@ -91,7 +91,7 @@ const Tasks = () => {
 
     // Add task mutation
     const addTask = async (taskData) => {
-        const response = await axios.post("http://localhost:5000/tasks", taskData);
+        const response = await axios.post("https://task-sync-sever.onrender.com/tasks", taskData);
         return response.data;
     };
 
@@ -122,7 +122,7 @@ const Tasks = () => {
 
     // Update task mutation
     const updateTask = async ({ taskId, category }) => {
-        const response = await axios.put(`http://localhost:5000/tasks/${taskId}`, { category });
+        const response = await axios.put(`https://task-sync-sever.onrender.com/tasks/${taskId}`, { category });
         return response.data;
     };
 
@@ -143,7 +143,7 @@ const Tasks = () => {
 
     // Delete task mutation
     const deleteTask = async (taskId) => {
-        const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+        const response = await axios.delete(`https://task-sync-sever.onrender.com/tasks/${taskId}`);
         return response.data;
     };
 

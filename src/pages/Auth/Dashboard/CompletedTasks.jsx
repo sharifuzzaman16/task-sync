@@ -9,7 +9,7 @@ const CompletedTasks = () => {
 
     // Fetch completed tasks for the logged-in user
     const fetchCompletedTasks = async () => {
-        const response = await axios.get("http://localhost:5000/tasks/completed", {
+        const response = await axios.get("https://task-sync-sever.onrender.com/tasks/completed", {
             params: { userEmail: user.email }, // Pass the user's email as a query parameter
         });
         return response.data;

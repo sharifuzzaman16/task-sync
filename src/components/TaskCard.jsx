@@ -36,7 +36,7 @@ const TaskCard = ({ task }) => {
     const editTaskMutation = useMutation({
         mutationFn: async (updatedTask) => {
             const response = await axios.patch(
-                `http://localhost:5000/tasks/${task._id}`,
+                `https://task-sync-sever.onrender.com/tasks/${task._id}`,
                 {
                     ...updatedTask,
                     userEmail: task.userEmail, // Include userEmail in the update request
@@ -71,7 +71,7 @@ const TaskCard = ({ task }) => {
     // Delete task mutation
     const deleteTaskMutation = useMutation({
         mutationFn: async (taskId) => {
-            const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+            const response = await axios.delete(`https://task-sync-sever.onrender.com/tasks/${taskId}`);
             return response.data;
         },
         onSuccess: () => {
