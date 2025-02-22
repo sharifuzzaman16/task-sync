@@ -12,7 +12,7 @@ import { AuthProvider } from './AuthProvider.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import HomeRedirect from './HomeRedirect.jsx';
 import Tasks from './pages/Auth/Dashboard/Tasks.jsx';
-import CompletedTask from './pages/Auth/Dashboard/CompletedTask.jsx';
+import CompletedTask from './pages/Auth/Dashboard/CompletedTasks.jsx';
 import ImportantTask from './pages/Auth/Dashboard/ImportantTask.jsx';
 import Profile from './pages/Auth/Dashboard/Profile.jsx';
 import Overview from './pages/Auth/Dashboard/Overview.jsx';

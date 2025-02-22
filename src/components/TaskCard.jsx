@@ -17,6 +17,9 @@ const TaskCard = ({ task }) => {
 
     // Determine badge color based on priority
     const getPriorityColor = (priority) => {
+        // Handle null or undefined priority
+        if (!priority) return "bg-gray-100 text-gray-500";
+
         switch (priority.toLowerCase()) {
             case "high":
                 return "bg-red-100 text-red-500";
@@ -125,7 +128,7 @@ const TaskCard = ({ task }) => {
                 {/* Top Section */}
                 <div className="flex items-start justify-between">
                     <span className={`${getPriorityColor(task.priority)} text-xs font-medium px-3 py-1 rounded-full`}>
-                        {task.priority}
+                        {task.priority || "Medium"} {/* Fallback to "Medium" if priority is null/undefined */}
                     </span>
                     <BsThreeDotsVertical className="dark:text-[#E0E0E0] text-[#1E2022] text-lg cursor-pointer transition" />
                 </div>
@@ -242,6 +245,17 @@ const TaskCard = ({ task }) => {
             )}
         </>
     );
+};
+
+TaskCard.defaultProps = {
+    task: {
+        _id: "",
+        title: "",
+        description: "",
+        category: "To-Do",
+        priority: "Medium", // Default priority
+        timestamp: new Date().toISOString(),
+    },
 };
 
 export default TaskCard;
